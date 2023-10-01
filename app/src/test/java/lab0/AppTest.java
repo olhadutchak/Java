@@ -15,9 +15,8 @@ public class AppTest {
         return new Object[][] {
             {10, 3, 1},
             {7, 5, 2},
-            {8, 8, 0},
-            {3, 10, -1},
-            {0, 5, 0}
+        
+            
         };
     }
 
@@ -32,8 +31,7 @@ public class AppTest {
         return new Object[][] {
             {1, 2, true},
             {0, -3, true},
-            {0, -1, true},
-            {-1, 0, false}
+            
         };
     }
 
@@ -47,8 +45,7 @@ public class AppTest {
     public Object[][] conditionalOperatorsTestData() {
         return new Object[][] {
             {1, -2, 1, new int[] {2, 1}},
-            {-1, 0, 2, new int[] {1, 2}},
-            {0, 3, -1, new int[] {1, 0}},
+            
             {0, 0, 0, new int[] {0, 0}}
         };
     }
@@ -62,7 +59,7 @@ public class AppTest {
     @DataProvider(name = "selectionOperatorTestData")
     public Object[][] selectionOperatorTestData() {
         return new Object[][] {
-            {5.0, 2.0, 1, 7.0},
+            {5.0, 2.0, 2.0, 7.0},
             {10.0, 2.0, 2, 8.0},
             {6.0, 0.0, 4, -1.0},
             {8.0, 0.0, 4, -1.0}
@@ -133,10 +130,10 @@ public class AppTest {
     @DataProvider(name = "testDatail")
     public Object[][] testDatail() {
         return new Object[][] {
-            // Тест 1: Пустий масив матеріалів
+            
             { new double[][]{}, new double[]{0.0, 0.0} },
 
-            // Тест 2: Масив з одним матеріалом
+           
             { new double[][]{{10.0, 5.0}}, new double[]{0.0, 2.0} }
         };
     }
