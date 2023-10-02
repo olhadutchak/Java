@@ -40,19 +40,27 @@ public static int  integerNumber(int A, int B) {
     
     return A % B;
 }
-    /*Two integers are given: A, B.
-    Check the truth of the statement: "True inequalities A and 0 or B < –2".
-    */
-    public static boolean conditionalTask(int A, int B) {
-          
-            return ( (A != 0) || (B < -2));
-     
-    }
-    /*
-     Three integers are given.
+ /**
+ * Checks the truth of the statement: "True inequalities A and 0 or B < -2".
+ *
+ * @param A The first integer.
+ * @param B The second integer.
+ * @return True if the statement "A != 0 || B < -2" is true; otherwise, false.
+ */
+public static boolean conditionalTask(int A, int B) {
+    return (A != 0) || (B < -2);
+}   
+/**
+* Three integers are given.
      Find the number of positives and the number
      of negative numbers in the original set.
-     */
+
+ * @param number1 The first integer.
+ * @param number2 The second integer.
+ * @param number3 The third integer.
+ * @return An array of two integers containing the count of positive numbers (index 0)
+ *         and the count of negative numbers (index 1) in the set.
+*/
     public static int[] conditionalOperators(int number1, int number2, int number3) {
         int countPositive = 0;
         int countNegative = 0;
@@ -67,61 +75,78 @@ public static int  integerNumber(int A, int B) {
         
         return new int[] {countPositive, countNegative};
     }
-    /*
+/**
      Arithmetic operations on numbers are numbered as follows: 1 - addition, 2 - subtraction,
      3 - multiplication, 4 - division. Given action number N (an integer in the range 1–4)
      and real numbers A and B (not equal to 0).
      Perform the specified action on the numbers and display the result.
-     */
-    public static double selectionOperator(double A, double B, int N) {
-        switch (N) {
-            case 1:
-                return  A + B;
-            case 2:
-                return  A - B;
-                
-            case 3:
-                return  A * B;
-               
-            case 4:
-                if (B != 0) {
-                    return  A / B;
-                } 
-                    return -1;
-            default:
-                throw new IllegalAccessError("Wrong number of switch");
-        }
 
-       
+ * @param A The first real number (not equal to 0).
+ * @param B The second real number (not equal to 0).
+ * @param N The action number, where 1 represents addition, 2 represents subtraction,
+ *          3 represents multiplication, and 4 represents division.
+ * @return The result of the specified arithmetic operation.
+ * @throws IllegalArgumentException If 'N' is not in the range 1-4, or if 'B' is equal to 0 when 'N' is 4.
+ */
+public static double selectionOperator(double A, double B, int N) {
+    switch (N) {
+        case 1:
+            return A + B;
+        case 2:
+            return A - B;
+        case 3:
+            return A * B;
+        case 4:
+            if (B != 0) {
+                return A / B;
+            } else {
+                throw new IllegalArgumentException("Division by zero is not allowed.");
+            }
+        default:
+            throw new IllegalArgumentException("Invalid action number. It should be in the range 1-4.");
     }
-    /*Given a real number - the price of 1 kg of candy.
-    Output the cost of 0.1, 0.2, ... , 1 kg of candies*/
-    public static double[] loopWithParameter(double priceKg) {
-        double[] prices = new double[10]; 
-    
-        for (int i = 0; i < 10; i++) {
-            double kg = (i + 1) * 0.1; 
-            prices[i] = kg * priceKg; 
-        }
-    
-        return prices;
-    } 
-    /*
-     Given an integer N (> 0), which is some power of 2: N = 2K.
-     Find the integer K - the indicator of this power.
-     */
-    public static int loopWithCondition(int N){
-        int K = 0; 
+}
+/**
+ * Calculate the cost of candy in increments of 0.1 kg up to 1 kg based on the price per 1 kg.
+ *
+ * @param priceKg The price of 1 kg of candy.
+ * @return An array of 10 doubles representing the cost of 0.1, 0.2, ..., 1 kg of candy
+ *         at the given price per 1 kg.
+ */
+public static double[] loopWithParameter(double priceKg) {
+    double[] prices = new double[10]; 
 
-        while (N > 1) {
-            N = N / 2;
-            K++;
-        }
-        return K;
+    for (int i = 0; i < 10; i++) {
+        double kg = (i + 1) * 0.1; 
+        prices[i] = kg * priceKg; 
     }
-    /*Given an integer N and a set of N positive real numbers. 
+
+    return prices;
+}
+/**
+ * Calculate the exponent K of a given integer N, which is a power of 2: N = 2^K.
+ *
+ * @param N An integer N (> 0) that is a power of 2.
+ * @return The integer K - the exponent of the power of 2.
+ */
+public static int loopWithCondition(int N){
+    int K = 0; 
+
+    while (N > 1) {
+        N = N / 2;
+        K++;
+    }
+    return K;
+}
+   
+/**Given an integer N and a set of N positive real numbers. 
     Print in the same order the integer parts of all numbers from the given set 
-    (as real numbers with a zero fractional part), as well as the sum of all integer parts. */
+    (as real numbers with a zero fractional part), as well as the sum of all integer parts.
+     
+ 
+ * @param numbers An array of positive real numbers.
+ * @return An array of integers containing the integer parts of the numbers followed by their sum.
+ */
     public static int[] sequences(double[] numbers) {
         int[] result = new int[numbers.length + 1];
         int sum = 0;
@@ -135,11 +160,16 @@ public static int  integerNumber(int A, int B) {
         result[numbers.length] = sum;
         return result;
     }
-    /* Given an integer N and a set of N pairs of numbers (m, v) - data on 
+/** Given an integer N and a set of N pairs of numbers (m, v) - data on 
     the mass m and volume v of parts made of various materials. 
     Display the number of the part made from the material of maximum density, 
     as well as the value of this maximum density. Density P is calculated using the formula
-    P = m/v.*/
+    P = m/v.
+    *
+ * @param materials An array of N pairs of numbers representing mass (m) and volume (v) of materials.
+ * @return An array of two doubles: the index of the material with maximum density and its maximum density.
+ *         If the input is null or empty, it returns [0.0, 0.0].
+    */
     public static double[] findMaxDensityDetail(double[][] materials) {
         if (materials == null || materials.length == 0) {
             return new double[]{0.0, 0.0};
@@ -162,10 +192,14 @@ public static int  integerNumber(int A, int B) {
         return new double[]{maxDensityIndex, maxDensity};
     }
     
-    /*
+/**
      * An integer N (> 2) is given. Generate and output an integer array of size 
      * N containing the first N elements of the Fibonacci sequence FK:
      * F1 = 1, F2 = 1, FK = FK–2 + FK–1, K = 3, 4, …
+     *  
+ * @param n An integer N (> 2) specifying the number of Fibonacci numbers to generate.
+ * @return An integer array of size N containing the first N elements of the Fibonacci sequence.
+ *         If N is less than or equal to 2, it returns an empty array.
      */
     public static int[] array(int n) {
         if (n <= 0) {
@@ -186,13 +220,18 @@ public static int  integerNumber(int A, int B) {
     
         return fibonacciArray;
     }
-    /*
+    /**
      * Given positive integers M, N, a number D and a 
      * set of M numbers. Form a matrix of size M ґ N, 
      * in which the first column coincides with the original set of numbers, 
      * and the elements of each subsequent column are equal to the sum of 
      * the corresponding element of the previous column and 
      * the number D (as a result, each row of the matrix will contain elements of an arithmetic progression).
+     * @param M  The number of rows in the matrix.
+     * @param N  The number of columns in the matrix.
+     * @param D  The common difference for the arithmetic progression in each column.
+     * @param initialNumbers An array of M positive integers representing the values in the first column.
+     * @return A 2D array (matrix) of size MxN containing the specified elements.
      */
     public static int[][] createMatrix(int M, int N, int D, int[] initialNumbers) {
         int[][] matrix = new int[M][N];

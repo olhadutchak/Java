@@ -26,7 +26,6 @@ public Object[][] testInputData() {
         {4.0, 64.0, 96.0}   
     };
 }
-//////////////////////////////////////////////////////////////////////////////////////
 
 @Test(dataProvider = "negativInputData", expectedExceptions = IllegalArgumentException.class)
 public void testNegativInput(double a) {
@@ -40,6 +39,7 @@ public Object[][] negativInputData() {
         {0.0},    // a = 0
     };
 }   
+
 ////////////////////////////////////////////////////////////
 @Test(dataProvider = "integerNumberNegativTestData", expectedExceptions = IllegalArgumentException.class)
 public void testInvalidInput(int A, int B) {
@@ -74,7 +74,15 @@ public Object[][] integerNumberNegativTestData() {
     }
 
 /////////////////////////////////////////////////////////
-    @DataProvider(name = "conditionalTaskTestData")
+
+@Test(dataProvider = "conditionalTaskTestData")
+    public void testConditionalTask(int A, int B, boolean expected) {
+        boolean result = Lab0.conditionalTask(A, B);
+        assertEquals(result, expected);
+    }
+
+
+ @DataProvider(name = "conditionalTaskTestData")
     public Object[][] conditionalTaskTestData() {
         return new Object[][] {
             {1, 2, true},
@@ -83,12 +91,14 @@ public Object[][] integerNumberNegativTestData() {
         };
     }
 
-    @Test(dataProvider = "conditionalTaskTestData")
-    public void testConditionalTask(int A, int B, boolean expected) {
-        boolean result = Lab0.conditionalTask(A, B);
+   
+//////////////////////////////////////////////////////////////////
+ @Test(dataProvider = "conditionalOperatorsTestData")
+    public void testConditionalOperators(int number1, int number2, int number3, int[] expected) {
+        int[] result = Lab0.conditionalOperators(number1, number2, number3);
         assertEquals(result, expected);
     }
-//////////////////////////////////////////////////////////////////
+
 
     @DataProvider(name = "conditionalOperatorsTestData")
     public Object[][] conditionalOperatorsTestData() {
@@ -100,9 +110,11 @@ public Object[][] integerNumberNegativTestData() {
     }
 
 
-    @Test(dataProvider = "conditionalOperatorsTestData")
-    public void testConditionalOperators(int number1, int number2, int number3, int[] expected) {
-        int[] result = Lab0.conditionalOperators(number1, number2, number3);
+   
+//////////////////////////////////////////////////////////////////////
+   @Test(dataProvider = "selectionOperatorTestData")
+    public void testSelectionOperator(double A, double B, int N, double expected) {
+        double result = Lab0.selectionOperator(A, B, N);
         assertEquals(result, expected);
     }
 
@@ -116,12 +128,21 @@ public Object[][] integerNumberNegativTestData() {
         };
     }
 
-    @Test(dataProvider = "selectionOperatorTestData")
-    public void testSelectionOperator(double A, double B, int N, double expected) {
-        double result = Lab0.selectionOperator(A, B, N);
-        assertEquals(result, expected);
+    
+    @Test(dataProvider = "testnegativInputData", expectedExceptions = IllegalArgumentException.class)
+    public void negativeTestSelectionOperator(double A, double B, int N) {
+        Lab0.selectionOperator(A, B, N);
     }
 
+    @DataProvider(name = "testnegativInputData")
+    public Object[][] testnegativInputData() {
+        return new Object[][] {
+            {2.0, 0.0, 4},     
+            {4.0, 3.0, 5},     
+            {3.0, 0.0, 4}     
+        };
+    }
+////////////////////////////////////////////////////////////////////
     @Test(dataProvider = "loopWithParameterTestData")
     public void testLoopWithParameter(double priceKg, double[] expectedPrices) {
         double[] actualPrices = Lab0.loopWithParameter(priceKg);
@@ -137,8 +158,8 @@ public Object[][] integerNumberNegativTestData() {
             {5.0, new double[]{0.50, 1.00, 1.50, 2.00, 2.50, 3.00, 3.50, 4.00, 4.50, 5.00}}
         };
     }
+////////////////////////////////////////////////////////////////
 
-    
     @Test(dataProvider = "loopWithConditionTestData")
     public void testLoopWithCondition(int N, int expected) {
         int result = Lab0.loopWithCondition(N);
@@ -154,7 +175,7 @@ public Object[][] integerNumberNegativTestData() {
         {16, 4}
     };
 }
-
+////////////////////////////////////////////////////////////
    
     @Test(dataProvider = "sequencesTestData")
     public void testSequences(double[] numbers, int[] expected) {
@@ -170,7 +191,7 @@ public Object[][] integerNumberNegativTestData() {
             {new double[] {7.3, 8.1, 9.4}, new int[] {7, 8, 9, 24}}
         };
     }
-    
+/////////////////////////////////////////////////////////////////////    
     @Test(dataProvider = "testDatail")
     public void testFindMaxDensityDetail(double[][] inputMaterials, double[] expectedOutput) {
         double[] result = Lab0.findMaxDensityDetail(inputMaterials);
@@ -187,9 +208,13 @@ public Object[][] integerNumberNegativTestData() {
             { new double[][]{{10.0, 5.0}}, new double[]{0.0, 2.0} }
         };
     }
-
+/////////////////////////////////////////////////////////////////////////
+@Test(dataProvider = "arrayTestData")
+    public void testArray(int n, int[] expected) {
+        int[] result = Lab0.array(n);
+        assertEquals(result, expected);
+    }
     
-
     @DataProvider(name = "arrayTestData")
     public Object[][] arrayTestData() {
         return new Object[][] {
@@ -200,11 +225,8 @@ public Object[][] integerNumberNegativTestData() {
         };
     }
 
-    @Test(dataProvider = "arrayTestData")
-    public void testArray(int n, int[] expected) {
-        int[] result = Lab0.array(n);
-        assertEquals(result, expected);
-    }
+    
+///////////////////////////////////////////////////////////
     @Test(dataProvider = "matrixTest")
     public void testCreateMatrix(int M, int N, int D, int[] initialNumbers, int[][] expectedMatrix) {
         int[][] resultMatrix = Lab0.createMatrix(M, N, D, initialNumbers);
@@ -219,6 +241,6 @@ public Object[][] integerNumberNegativTestData() {
         };
     }
     
-
+/////////////////////////////////////////////////////////////////////////////
     
 }
