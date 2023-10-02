@@ -1,31 +1,45 @@
 package lab0;
 
 public class Lab0 {
-    //The given length of the edge of the cube is a. 
-    //Find the volume of the cube V = a^3 and its surface area S = 6·a^2.
+//The given length of the edge of the cube is a. 
+//Find the volume of the cube V = a^3 and its surface area S = 6·a^2.
+/**
+ *
+ * @param a The length of the edge of the cube (a > 0).
+ * @return An array containing the volume and surface area of the cube.
+ * @throws IllegalArgumentException If 'a' is less than or equal to 0.
+ */
     public static double[] inputOutput(double a) {
+        if (a <= 0) {
+            throw new IllegalArgumentException("The length of the edge 'a' must be greater than 0.");
+        }
         
         double volume = Math.pow(a, 3);
-        
         double surfaceArea = 6 * Math.pow(a, 2);
+        
         return new double[]{volume, surfaceArea};
     }
+    
 
-    /*Given positive integers A and B (A > B). On a length segment
-    A is placed as much as possible
-    the number of segments of length B (without overlays).
-    Using the operation of taking the remainder from division by a whole,
-    find the length of the unoccupied part of segment A
-    */
-    public static int integerNumber(int A, int B) {
-        if (A > B) {
-             
-            return A % B; 
-        } 
-            return -1; 
-        
-        
+/**
+ * Calculates the remaining length of segment A after placing as many segments of length B as possible on it without overlapping.
+ *
+ * @param A Length of segment A (A>0).
+ * @param B Length of segment B (B>0 and < A).
+ * @return The remaining length of segment A after placing segments of B on it.
+ * @throws IllegalArgumentException If A <= B or if A or B is less than 0.
+ */
+public static int  integerNumber(int A, int B) {
+    if (A <= 0 || B <= 0) {
+        throw new IllegalArgumentException("A and B must be greater than 0");
     }
+    
+    if (A <= B) {
+        throw new IllegalArgumentException("A must be greater than B");
+    }
+    
+    return A % B;
+}
     /*Two integers are given: A, B.
     Check the truth of the statement: "True inequalities A and 0 or B < –2".
     */

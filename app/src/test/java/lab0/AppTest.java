@@ -10,7 +10,60 @@ import org.testng.annotations.Test;
 
 
 public class AppTest {
-    @DataProvider(name = "integerNumberTestData")
+///////////////////////////////////////////////////////////
+@Test(dataProvider = "testInputData")
+public void testValidInput(double a, double expectedVolume, double expectedSurfaceArea) {
+    double[] result = Lab0.inputOutput(a);
+    assertEquals(result[0], expectedVolume, 0.001); 
+    assertEquals(result[1], expectedSurfaceArea, 0.001); 
+}
+
+@DataProvider(name = "testInputData")
+public Object[][] testInputData() {
+    return new Object[][] {
+        {2.0, 8.0, 24.0},   
+        {3.0, 27.0, 54.0},  
+        {4.0, 64.0, 96.0}   
+    };
+}
+//////////////////////////////////////////////////////////////////////////////////////
+
+@Test(dataProvider = "negativInputData", expectedExceptions = IllegalArgumentException.class)
+public void testNegativInput(double a) {
+    Lab0.inputOutput(a);
+}
+
+@DataProvider(name = "negativInputData")
+public Object[][] negativInputData() {
+    return new Object[][] {
+        {-2.0},   // Негативне значення a
+        {0.0},    // a = 0
+    };
+}   
+////////////////////////////////////////////////////////////
+@Test(dataProvider = "integerNumberNegativTestData", expectedExceptions = IllegalArgumentException.class)
+public void testInvalidInput(int A, int B) {
+    Lab0.integerNumber(A, B);
+}
+
+@DataProvider(name = "integerNumberNegativTestData")
+public Object[][] integerNumberNegativTestData() {
+    return new Object[][] {
+        {5, 10},   // A <= B
+        {0, 5},    // A <= 0
+        {10, 0},   // B <= 0
+        {5, 5},    // A == B
+        {-2, 3},   // A < 0
+        {5, -1},   // B < 0
+    };
+}
+
+@Test(dataProvider = "integerNumberTestData")
+    public void testIntegerNumber(int A, int B, int expected) {
+        int result = Lab0.integerNumber(A, B);
+        assertEquals(result, expected);
+    }
+@DataProvider(name = "integerNumberTestData")
     public Object[][] integerNumberTestData() {
         return new Object[][] {
             {10, 3, 1},
@@ -20,12 +73,7 @@ public class AppTest {
         };
     }
 
-    @Test(dataProvider = "integerNumberTestData")
-    public void testIntegerNumber(int A, int B, int expected) {
-        int result = Lab0.integerNumber(A, B);
-        assertEquals(result, expected);
-    }
-
+/////////////////////////////////////////////////////////
     @DataProvider(name = "conditionalTaskTestData")
     public Object[][] conditionalTaskTestData() {
         return new Object[][] {
@@ -40,6 +88,7 @@ public class AppTest {
         boolean result = Lab0.conditionalTask(A, B);
         assertEquals(result, expected);
     }
+//////////////////////////////////////////////////////////////////
 
     @DataProvider(name = "conditionalOperatorsTestData")
     public Object[][] conditionalOperatorsTestData() {
@@ -49,6 +98,7 @@ public class AppTest {
             {0, 0, 0, new int[] {0, 0}}
         };
     }
+
 
     @Test(dataProvider = "conditionalOperatorsTestData")
     public void testConditionalOperators(int number1, int number2, int number3, int[] expected) {
